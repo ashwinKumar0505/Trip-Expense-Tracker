@@ -1,3 +1,6 @@
 export const ADD_EXPENSE = "ADD_EXPENSE";
 export const ADD_TRIP_NAME = "ADD_TRIP_NAME";
 export const ADD_TRIP_MEMBERS = "ADD_TRIP_MEMBERS";
+export const RESTORE_STATE = "RESTORE_STATE";
+export const DELETE_EXPENSE = "DELETE_EXPENSE";
+export const EDIT_EXPENSE = "EDIT_EXPENSE";

@@ -7,17 +7,24 @@ import {
   TabPanels,
   TabPanel,
   Box,
+  useMediaQuery,
+  useDisclosure,
 } from "@chakra-ui/react";
 import ExpensesHistory from "../expensesHistory";
 import TotalBalances from "../totalBalances";
 import ExpenseAddForm from "../expenseAddForm";
+import AddIconFloater from "../addIconFloater";
+import AddExpenseModal from "../addExpenseModal";
 
 const HomePage = () => {
+  const [isLargerThan1000] = useMediaQuery("(min-width: 1000px)");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <Flex width="100%" height="90%">
+    <Flex width="100%" height="100%">
+      <AddExpenseModal isOpen={isOpen} onClose={onClose} />
       <Box
-        width="65%"
-        mr={4}
+        width={isLargerThan1000 ? "65%" : "100%"}
         p={5}
         boxShadow="0 0 3px 2px rgba(0,0,0,0.1)"
         borderRadius="md"
@@ -32,15 +39,22 @@ const HomePage = () => {
             <TabPanel height="100%" p={0}>
               <ExpensesHistory />
             </TabPanel>
-            <TabPanel height='100%' p={0}>
+            <TabPanel height="100%" p={0}>
               <TotalBalances />
             </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
-      <Box width="35%">
-        <ExpenseAddForm />
-      </Box>
+      {isLargerThan1000 && (
+        <Box width="35%" ml={4}>
+          <ExpenseAddForm />
+        </Box>
+      )}
+      {!isLargerThan1000 && (
+        <Box position="fixed" bottom={5} right={5}>
+          <AddIconFloater onOpen={onOpen} />
+        </Box>
+      )}
     </Flex>
   );
 };

@@ -2,13 +2,19 @@ import {
   ADD_EXPENSE,
   ADD_TRIP_MEMBERS,
   ADD_TRIP_NAME,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  RESTORE_STATE,
 } from "../constants/actionTypes";
 
-export const addExpense = (expenseData: {
+type TExpenseData = {
+  id: string;
   personName: string;
   amount: number;
   description: string;
-}) => {
+};
+
+export const addExpense = (expenseData: TExpenseData) => {
   return {
     type: ADD_EXPENSE,
     payload: expenseData,
@@ -27,4 +33,20 @@ export const addMembers = (members: string[]) => ({
   payload: {
     members,
   },
+});
+
+export const restoreState = () => ({
+  type: RESTORE_STATE,
+});
+
+export const deleteExpense = (expenseId: string) => ({
+  type: DELETE_EXPENSE,
+  payload: {
+    id: expenseId,
+  },
+});
+
+export const editExpense = (expenseData: TExpenseData) => ({
+  type: EDIT_EXPENSE,
+  payload: expenseData,
 });

@@ -1,13 +1,19 @@
 import { Box, Text, Input, Flex, Icon, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GrAddCircle } from "react-icons/gr";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addMembers, addTripName } from "../../actions/actions";
+import { ENTER_KEY } from "../../constants/keys";
+import { getTripMembers, getTripName } from "../../selectors";
 
 const TripTrackingForm = () => {
-  const [name, setName] = useState("");
-  const [participants, setParticipants] = useState<string[]>([""]);
+  const tripName = useSelector(getTripName);
+  const tripMembers = useSelector(getTripMembers);
+  const [name, setName] = useState(tripName);
+  const [participants, setParticipants] = useState<string[]>(
+    tripMembers.length === 0 ? [""] : tripMembers
+  );
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,6 +39,11 @@ const TripTrackingForm = () => {
     dispatch(addTripName(name));
     dispatch(addMembers(participants));
     history.push("/expense-tracker");
+  };
+
+  const keydownHandler = (e: React.KeyboardEvent) => {
+    e.preventDefault();
+    if (e.key === ENTER_KEY) addNewMember();
   };
   return (
     <Flex width="100%" justifyContent="center" alignItems="center">
@@ -85,6 +96,8 @@ const TripTrackingForm = () => {
               alignItems="center"
               justifyContent="center"
               onClick={addNewMember}
+              tabIndex={0}
+              onKeyDown={keydownHandler}
             >
               <Icon as={GrAddCircle} mr={2} />
               <Text>Add New Member</Text>

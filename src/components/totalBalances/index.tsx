@@ -71,8 +71,8 @@ const TotalBalances = () => {
               <AccordionPanel pb={4}>
                 <UnorderedList>
                   {individualExpensesHistory.length > 0 ? (
-                    individualExpensesHistory.map((expense) => (
-                      <ListItem>
+                    individualExpensesHistory.map((expense, index) => (
+                      <ListItem key={expense.amount + index}>
                         Invested Rs.{expense.amount} at {expense.description}
                       </ListItem>
                     ))

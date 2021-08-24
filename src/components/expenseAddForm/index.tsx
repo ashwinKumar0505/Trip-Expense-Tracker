@@ -14,6 +14,7 @@ import "react-responsive-combo-box/dist/index.css";
 import { addExpense } from "../../actions/actions";
 import { getTripMembers } from "../../selectors";
 import { AiFillCaretDown } from "react-icons/ai";
+import generateId from "../../utils/generateId";
 
 const ExpenseAddForm = () => {
   const [name, setName] = useState("");
@@ -34,6 +35,7 @@ const ExpenseAddForm = () => {
 
     dispatch(
       addExpense({
+        id: generateId(),
         personName: name,
         amount: parseInt(amount, 10),
         description,
