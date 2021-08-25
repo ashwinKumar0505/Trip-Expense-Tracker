@@ -1,4 +1,12 @@
-import { Box, Text, Input, Flex, Icon, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Input,
+  Flex,
+  Icon,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GrAddCircle } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { addMembers, addTripName } from "../../actions/actions";
 import { ENTER_KEY } from "../../constants/keys";
 import { getTripMembers, getTripName } from "../../selectors";
+import findDuplicates from "../../utils/findDuplicates";
 
 const TripTrackingForm = () => {
   const tripName = useSelector(getTripName);
@@ -16,6 +25,7 @@ const TripTrackingForm = () => {
   );
   const dispatch = useDispatch();
   const history = useHistory();
+  const toast = useToast();
 
   const updateParticipants = (index: number, value: string) => {
     setParticipants([
@@ -36,9 +46,31 @@ const TripTrackingForm = () => {
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addTripName(name));
-    dispatch(addMembers(participants));
-    history.push("/expense-tracker");
+
+    const duplicateElements = findDuplicates(participants);
+    console.log(duplicateElements);
+
+    if (duplicateElements.length > 0) {
+      toast({
+        title: "Duplicate Names.",
+        description: "No Duplicate names allowed.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+    } else {
+      dispatch(addTripName(name));
+      dispatch(addMembers(participants));
+      toast({
+        title: "Group created Successfully",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      history.push("/expense-tracker");
+    }
   };
 
   const keydownHandler = (e: React.KeyboardEvent) => {

@@ -10,6 +10,7 @@ import {
   MenuItem,
   Text,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import logo from "../../images/logo.png";
 import { IoMdSettings } from "react-icons/io";
@@ -21,10 +22,18 @@ import { restoreState } from "../../actions/actions";
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const deleteGroup = () => {
     dispatch(restoreState());
     history.push("/");
+    toast({
+      title: "Group deleted Successfully",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
   };
   const isSettingsEnabled = history.location.pathname !== "/";
   return (

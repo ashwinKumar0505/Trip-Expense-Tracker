@@ -1,11 +1,10 @@
-import { useMediaQuery, Flex, Image, Heading } from "@chakra-ui/react";
+import { useMediaQuery, Flex } from "@chakra-ui/react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import HomePage from "./components/homePage";
 import CreateTripForm from "./components/createTripForm";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getTripName } from "./selectors";
-import logo from "./images/logo.png";
 import Header from "./components/header";
 
 function App() {
