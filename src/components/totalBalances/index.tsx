@@ -43,8 +43,12 @@ const TotalBalances = () => {
         marginBottom={4}
       >
         <AlertIcon fontWeight="medium" />
-        The total amount invested for the trip is&nbsp;
-        <Box fontWeight="semibold">{totalAmount}</Box>
+        <Text>
+          The total amount invested for the trip is&nbsp;
+          <Box fontWeight="semibold" as="span">
+            {totalAmount}
+          </Box>
+        </Text>
       </Alert>
       <Accordion allowMultiple>
         {Object.values(expensesByPerson).map((entry) => {
