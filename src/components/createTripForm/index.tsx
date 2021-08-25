@@ -100,7 +100,7 @@ const TripTrackingForm = () => {
               isRequired
               errorBorderColor="crimson"
               placeholder="Enter the trip name"
-              autoComplete="false"
+              autoComplete="off"
             />
           </Box>
           <Box>
@@ -117,7 +117,7 @@ const TripTrackingForm = () => {
                   isRequired
                   errorBorderColor="crimson"
                   autoFocus={index !== 0 && index + 1 === participants.length}
-                  autoComplete="false"
+                  autoComplete="off"
                 />
               ))}
             </Box>

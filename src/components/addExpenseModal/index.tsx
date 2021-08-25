@@ -61,6 +61,7 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
       isClosable: true,
       position: "top",
     });
+    onClose();
   };
 
   return (
@@ -86,6 +87,8 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
                 defaultValue={name}
                 editable={false}
                 renderRightElement={() => <AiFillCaretDown />}
+                highlightColor="#E2E8F0"
+                selectedOptionColor="#CBD5E0"
               />
               <Textarea
                 placeholder="Description"
@@ -96,6 +99,7 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
                 minH="175px"
                 isRequired
                 errorBorderColor="crimson"
+                autoComplete="off"
               />
               <Input
                 type="number"
@@ -105,6 +109,7 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
                 onChange={(e) => setAmount(e.target.value)}
                 isRequired
                 errorBorderColor="crimson"
+                autoComplete="off"
               />
             </Box>
           </ModalBody>

@@ -79,6 +79,8 @@ const EditExpenseModal = ({
                 defaultValue={name}
                 editable={false}
                 renderRightElement={() => <AiFillCaretDown />}
+                highlightColor="#E2E8F0"
+                selectedOptionColor="#CBD5E0"
               />
               <Textarea
                 placeholder="Description"
@@ -89,6 +91,7 @@ const EditExpenseModal = ({
                 minH="175px"
                 isRequired
                 errorBorderColor="crimson"
+                autoComplete="off"
               />
               <Input
                 type="number"
@@ -98,6 +101,7 @@ const EditExpenseModal = ({
                 onChange={(e) => setAmount(e.target.value)}
                 isRequired
                 errorBorderColor="crimson"
+                autoComplete="off"
               />
             </Box>
           </ModalBody>

@@ -109,17 +109,14 @@ const ExpensesHistory = () => {
                 onClick={() => setSelectedExpense(expense.id)}
               />
               <MenuList>
-                <MenuItem>
-                  <Flex alignItems="center" onClick={onOpen}>
+                <MenuItem onClick={onOpen}>
+                  <Flex alignItems="center">
                     <Icon as={FaEdit} mr={2} />
                     <Text>Edit Expense</Text>
                   </Flex>
                 </MenuItem>
-                <MenuItem>
-                  <Flex
-                    alignItems="center"
-                    onClick={() => expenseDeleteHandler(expense.id)}
-                  >
+                <MenuItem onClick={() => expenseDeleteHandler(expense.id)}>
+                  <Flex alignItems="center">
                     <Icon as={AiFillDelete} mr={2} />
                     <Text>Delete Expense</Text>
                   </Flex>

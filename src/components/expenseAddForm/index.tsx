@@ -72,6 +72,8 @@ const ExpenseAddForm = () => {
             editable={false}
             renderRightElement={() => <AiFillCaretDown />}
             defaultValue={name}
+            highlightColor="#E2E8F0"
+            selectedOptionColor="#CBD5E0"
           />
           <Textarea
             placeholder="Description"
@@ -82,6 +84,7 @@ const ExpenseAddForm = () => {
             minH="175px"
             isRequired
             errorBorderColor="crimson"
+            autoComplete="off"
           />
           <Input
             type="number"
@@ -92,6 +95,7 @@ const ExpenseAddForm = () => {
             mb={6}
             isRequired
             errorBorderColor="crimson"
+            autoComplete="off"
           />
           <Flex>
             <Button type="submit" colorScheme="green" width="45%" mr={5}>
