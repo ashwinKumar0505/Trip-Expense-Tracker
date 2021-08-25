@@ -74,8 +74,10 @@ const TripTrackingForm = () => {
   };
 
   const keydownHandler = (e: React.KeyboardEvent) => {
-    e.preventDefault();
-    if (e.key === ENTER_KEY) addNewMember();
+    if (e.key === ENTER_KEY) {
+      e.preventDefault();
+      addNewMember();
+    }
   };
   return (
     <Flex width="100%" justifyContent="center" alignItems="center">
