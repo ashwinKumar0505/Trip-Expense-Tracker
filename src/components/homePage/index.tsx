@@ -15,10 +15,20 @@ import TotalBalances from "../totalBalances";
 import ExpenseAddForm from "../expenseAddForm";
 import AddIconFloater from "../addIconFloater";
 import AddExpenseModal from "../addExpenseModal";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getTripName } from "../../selectors";
 
 const HomePage = () => {
   const [isLargerThan1000] = useMediaQuery("(min-width: 1000px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const tripName = useSelector(getTripName);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (tripName.length === 0) history.push("/");
+  }, [history, tripName.length]);
 
   return (
     <Flex width="100%" height="100%">

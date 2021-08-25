@@ -1,12 +1,12 @@
-import { useMediaQuery, Flex } from "@chakra-ui/react";
+import { useMediaQuery, Flex, Image, Heading } from "@chakra-ui/react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import Header from "./components/header";
 import HomePage from "./components/homePage";
 import CreateTripForm from "./components/createTripForm";
-import EditTripForm from "./components/editTripForm";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getTripName } from "./selectors";
+import logo from "./images/logo.png";
+import Header from "./components/header";
 
 function App() {
   const tripName = useSelector(getTripName);
@@ -23,9 +23,6 @@ function App() {
         <Switch>
           <Route path="/expense-tracker" exact>
             <HomePage />
-          </Route>
-          <Route path="/edit-trip-details" exact>
-            <EditTripForm />
           </Route>
           <Route path="/create-trip" exact>
             <CreateTripForm />
