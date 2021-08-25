@@ -30,6 +30,7 @@ const ExpenseAddForm = () => {
     setDescription("");
   };
 
+  console.log(name);
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -70,6 +71,7 @@ const ExpenseAddForm = () => {
             }}
             editable={false}
             renderRightElement={() => <AiFillCaretDown />}
+            defaultValue={name}
           />
           <Textarea
             placeholder="Description"
