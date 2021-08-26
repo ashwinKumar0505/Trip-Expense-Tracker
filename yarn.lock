@@ -10030,10 +10030,10 @@ react-remove-scroll@2.4.1:
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
 
-react-responsive-combo-box@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/react-responsive-combo-box/-/react-responsive-combo-box-1.2.6.tgz#4aa5331b843d25968e6351ffb3c469f79dbb6c70"
-  integrity sha512-MRVWLqpOEIWgF5aoInUNt7Esif3K3i3jJThvIWAPTHFwHIhZX+4pHeE7GLiiaz2u+Jm4XvaVQEbTW+C/tY/f0g==
+react-responsive-combo-box@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/react-responsive-combo-box/-/react-responsive-combo-box-1.2.7.tgz#47be8d0fcd41a674d1be805bd6c0b4d16cca095e"
+  integrity sha512-mvG9lvSovrTM2WaErLe8IImjIcfcA0DciybQzjhbfaGCKivTrYGPQphQbqjab8Hz/BzETX1PB51OZZ8wbFYCtA==
 
 react-router-dom@^5.2.0:
   version "5.2.0"
