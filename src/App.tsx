@@ -4,11 +4,11 @@ import HomePage from "./components/homePage";
 import CreateTripForm from "./components/createTripForm";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getTripName } from "./selectors";
+import { getGroupName } from "./selectors";
 import Header from "./components/header";
 
 function App() {
-  const tripName = useSelector(getTripName);
+  const tripName = useSelector(getGroupName);
   const history = useHistory();
   const [isLargerThan1000] = useMediaQuery("(min-width: 1000px)");
 

@@ -16,16 +16,19 @@ import logo from "../../images/logo.png";
 import { IoMdSettings } from "react-icons/io";
 import { AiFillDelete } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { restoreState } from "../../actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentGroup } from "../../actions/actions";
+import { useDeleteGroup } from "../../queries/mutation";
+import { getGroupId } from "../../selectors";
 
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const toast = useToast();
+  const groupId = useSelector(getGroupId);
 
-  const deleteGroup = () => {
-    dispatch(restoreState());
+  const onDeletionSuccess = () => {
+    dispatch(updateCurrentGroup({ groupId: "", groupName: "" }));
     history.push("/");
     toast({
       title: "Group deleted Successfully",
@@ -35,6 +38,23 @@ const Header = () => {
       position: "top",
     });
   };
+
+  const onDeletionError = () => {
+    toast({
+      title: "Error while deleting the expense",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
+  const deleteGroupHandler = useDeleteGroup(onDeletionSuccess, onDeletionError);
+
+  const deleteGroup = () => {
+    deleteGroupHandler.mutate({ groupId });
+  };
+
   const isSettingsEnabled = history.location.pathname !== "/";
   return (
     <Flex

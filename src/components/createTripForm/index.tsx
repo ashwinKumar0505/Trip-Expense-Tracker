@@ -9,23 +9,50 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GrAddCircle } from "react-icons/gr";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addMembers, addTripName } from "../../actions/actions";
+import { updateCurrentGroup } from "../../actions/actions";
 import { ENTER_KEY } from "../../constants/keys";
-import { getTripMembers, getTripName } from "../../selectors";
+import { useCreateGroup } from "../../queries/mutation";
 import findDuplicates from "../../utils/findDuplicates";
 
 const TripTrackingForm = () => {
-  const tripName = useSelector(getTripName);
-  const tripMembers = useSelector(getTripMembers);
-  const [name, setName] = useState(tripName);
-  const [participants, setParticipants] = useState<string[]>(
-    tripMembers.length === 0 ? [""] : tripMembers
-  );
+  const [name, setName] = useState("");
+  const [participants, setParticipants] = useState<string[]>([""]);
   const dispatch = useDispatch();
   const history = useHistory();
   const toast = useToast();
+
+  const onSuccess = (data: any) => {
+    const { groupName, _id: groupId } = data;
+
+    dispatch(
+      updateCurrentGroup({
+        groupName,
+        groupId,
+      })
+    );
+    history.push("/expense-tracker");
+    toast({
+      title: "Group created Successfully",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
+  const onError = () => {
+    toast({
+      title: "Error while creating the group",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
+  const groupCreator = useCreateGroup(onSuccess, onError);
 
   const updateParticipants = (index: number, value: string) => {
     setParticipants([
@@ -48,7 +75,6 @@ const TripTrackingForm = () => {
     e.preventDefault();
 
     const duplicateElements = findDuplicates(participants);
-    console.log(duplicateElements);
 
     if (duplicateElements.length > 0) {
       toast({
@@ -60,16 +86,10 @@ const TripTrackingForm = () => {
         position: "top",
       });
     } else {
-      dispatch(addTripName(name));
-      dispatch(addMembers(participants));
-      toast({
-        title: "Group created Successfully",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-        position: "top",
+      groupCreator.mutate({
+        groupMembers: participants,
+        groupName: name,
       });
-      history.push("/expense-tracker");
     }
   };
 
