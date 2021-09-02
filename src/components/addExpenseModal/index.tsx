@@ -139,7 +139,13 @@ const AddExpenseModal = ({
 
           <ModalFooter>
             <Flex width="70%">
-              <Button type="submit" colorScheme="green" width="45%" mr={5}>
+              <Button
+                type="submit"
+                colorScheme="green"
+                width="45%"
+                mr={5}
+                isLoading={expenseAdder.isLoading}
+              >
                 Add Expense
               </Button>
               <Button

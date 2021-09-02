@@ -158,7 +158,13 @@ const TripTrackingForm = () => {
             </Flex>
           </Box>
           <Flex width="100%" mt={5} justifyContent="space-between">
-            <Button type="submit" colorScheme="green" width="46%" mr={5}>
+            <Button
+              type="submit"
+              colorScheme="green"
+              width="46%"
+              mr={5}
+              isLoading={groupCreator.isLoading}
+            >
               Start Tracking
             </Button>
             <Button

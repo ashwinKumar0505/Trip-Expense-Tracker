@@ -20,12 +20,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentGroup } from "../../actions/actions";
 import { useDeleteGroup } from "../../queries/mutation";
 import { getGroupId } from "../../selectors";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const toast = useToast();
   const groupId = useSelector(getGroupId);
+  const [isSettingsEnabled, setIsSettingsEnabled] = useState(false);
 
   const onDeletionSuccess = () => {
     dispatch(updateCurrentGroup({ groupId: "", groupName: "" }));
@@ -55,7 +58,11 @@ const Header = () => {
     deleteGroupHandler.mutate({ groupId });
   };
 
-  const isSettingsEnabled = history.location.pathname !== "/";
+  useEffect(() => {
+    if (groupId.length > 0) setIsSettingsEnabled(true);
+    else setIsSettingsEnabled(false);
+  }, [groupId]);
+
   return (
     <Flex
       py={2}

@@ -103,7 +103,9 @@ const EditExpenseModal = ({
       <ModalOverlay />
       <ModalContent>
         {expenseFetcher.isFetching ? (
-          <Loader />
+          <Box p={5}>
+            <Loader />
+          </Box>
         ) : (
           <form onSubmit={submitHandler}>
             <ModalHeader borderBottom="1px solid rgba(0, 0, 0, 0.08)">
@@ -157,7 +159,13 @@ const EditExpenseModal = ({
 
             <ModalFooter>
               <Flex>
-                <Button type="submit" colorScheme="green" width="45%" mr={5}>
+                <Button
+                  type="submit"
+                  colorScheme="green"
+                  width="45%"
+                  mr={5}
+                  isLoading={expenseEditor.isLoading}
+                >
                   Update
                 </Button>
                 <Button
