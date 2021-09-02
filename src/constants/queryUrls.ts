@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://trip-expense-tracker.herokuapp.com";
 
 export const getExpensesByPerson = () => `${BASE_URL}/expenses-by-person`;
 export const getExpensesHistory = () => `${BASE_URL}/expenses-history`;
