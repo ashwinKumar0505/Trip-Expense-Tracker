@@ -32,14 +32,16 @@ const GroupPageLayout = ({
   };
   return (
     <Box w="100vw" h="100vh">
-      <Box
-        px={isLargerThan850 ? "50px" : 0}
-        h={`calc(100% - 10rem)`}
-      >
-        <Flex alignItems="center" pt={14} mb={10} justify="center">
+      <Box h={`calc(100% - 10rem)`}>
+        <Flex
+          alignItems="center"
+          pt={14}
+          mb={isLargerThan850 ? 10 : 5}
+          justify="center"
+        >
           <Image src={logo} height={10} width={10} alt="logo" mr={3} />
           <Heading
-            fontSize="38px"
+            fontSize={isLargerThan850 ? "38px" : "32px"}
             fontWeight="500"
             fontFamily="Roboto, sans-serif"
             background="linear-gradient(90deg, rgba(81,181,73,0.9178046218487395) 35%, rgba(16,119,48,1) 100%)"
@@ -60,6 +62,7 @@ const GroupPageLayout = ({
         width="100%"
         h={14}
         bg="blue.800"
+        zIndex={20}
       >
         <Flex
           alignItems="center"
