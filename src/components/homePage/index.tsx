@@ -47,7 +47,6 @@ const HomePage = () => {
           />
           <Box
             width={isLargerThan850 ? "65%" : "100%"}
-            p={5}
             boxShadow="0 0 3px 2px rgba(0,0,0,0.1)"
             borderRadius="md"
             height="100%"

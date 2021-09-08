@@ -108,7 +108,8 @@ const TripTrackingForm = () => {
       <Flex width="100%" h="100%" justifyContent="center">
         <Box
           width="650px"
-          p={5}
+          px={5}
+          py={5}
           boxShadow="0 0 3px 2px rgba(0,0,0,0.1)"
           borderRadius="md"
           height="fit-content"

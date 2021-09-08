@@ -91,7 +91,6 @@ const GroupsListPage = () => {
           direction="column"
           items="center"
           justify="center"
-          pb={14}
           h="100%"
         >
           <Flex
@@ -102,7 +101,10 @@ const GroupsListPage = () => {
             w="100%"
           >
             <Box textAlign="center" width="100%">
-              <Heading fontSize="3xl" fontWeight="bold">
+              <Heading
+                fontSize={isLargerThan850 ? "3xl" : "2xl"}
+                fontWeight="bold"
+              >
                 Let's Get Started
               </Heading>
               <Text
@@ -114,8 +116,8 @@ const GroupsListPage = () => {
               >
                 Choose your group to get started
               </Text>
-              <Flex justifyContent="center" my={8} width="100%">
-                <InputGroup borderColor="grey.300" width="450px">
+              <Flex justifyContent="center" mt={8} mb={2} width="100%">
+                <InputGroup borderColor="grey.300" maxW="450px" mx={5}>
                   <InputLeftElement
                     pointerEvents="none"
                     children={<Icon as={FiSearch} color="gray.500" />}
@@ -123,7 +125,6 @@ const GroupsListPage = () => {
                   <Input
                     placeholder="Search"
                     height={10}
-                    mr={4}
                     boxShadow="sm"
                     onChange={(e) => setSearchTerm(e.target.value)}
                     _placeholder={{
@@ -145,22 +146,27 @@ const GroupsListPage = () => {
                 </Flex>
               )}
             </Box>
-            <Flex width="100%" flex={1} overflowY="auto">
+            <Flex
+              width="100%"
+              flex={1}
+              overflowY="auto"
+              px={isLargerThan850 ? "50px" : 5}
+              py={5}
+            >
               {groupNamesFetcher.isFetching && (
                 <Loader loadingText="Loading GroupNames ..." />
               )}
-              <Grid
-                width="100%"
-                templateColumns={
-                  isLargerThan850 ? "repeat(3, 1fr)" : "repeat(1,1fr)"
-                }
-                columnGap={isLargerThan850 ? 8 : 2}
-                rowGap={2}
-                p={2}
-                height="fit-content"
-              >
-                {groupNamesFetcher.isFetched &&
-                  groupNamesFetcher.data?.map(
+              {!groupNamesFetcher.isFetching && (
+                <Grid
+                  width="100%"
+                  templateColumns={
+                    isLargerThan850 ? "repeat(3, 1fr)" : "repeat(1,1fr)"
+                  }
+                  columnGap={isLargerThan850 ? 8 : 2}
+                  rowGap={2}
+                  height="fit-content"
+                >
+                  {groupNamesFetcher.data?.map(
                     (group: {
                       id: string;
                       name: string;
@@ -172,7 +178,8 @@ const GroupsListPage = () => {
                       </Box>
                     )
                   )}
-              </Grid>
+                </Grid>
+              )}
             </Flex>
           </Flex>
         </Flex>
