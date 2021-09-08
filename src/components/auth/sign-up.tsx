@@ -102,6 +102,7 @@ const SignUp = () => {
             <FormControl>
               <FormLabel>Your Name</FormLabel>
               <Input
+                placeholder="Enter Your Name"
                 id="name"
                 isRequired
                 onChange={(e) => handleInputChange(e.target.id, e.target.value)}
@@ -112,6 +113,7 @@ const SignUp = () => {
             >
               <FormLabel>Email address</FormLabel>
               <Input
+                placeholder="Enter Email Address"
                 type="email"
                 id="email"
                 isRequired
@@ -126,6 +128,7 @@ const SignUp = () => {
             >
               <FormLabel>Password</FormLabel>
               <PasswordField
+                placeholder="Enter Password"
                 id="password"
                 isRequired
                 onChange={(e) => handleInputChange(e.target.id, e.target.value)}

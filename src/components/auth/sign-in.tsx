@@ -92,6 +92,7 @@ const SignIn = () => {
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
+                placeholder="Enter Email Address"
                 id="email"
                 isRequired
                 onChange={(e) => handleInputChange(e.target.id, e.target.value)}

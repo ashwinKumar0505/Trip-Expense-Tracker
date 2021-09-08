@@ -1,4 +1,4 @@
-const BASE_URL = "https://trip-expense-tracker.herokuapp.com/";
+const BASE_URL = "https://api-trip-tracker.herokuapp.com";
 
 // Auth
 export const signIn = () => `${BASE_URL}/users/sign-in`;
