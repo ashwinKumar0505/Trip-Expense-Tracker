@@ -8,21 +8,25 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ComboBox from "react-responsive-combo-box";
 import "react-responsive-combo-box/dist/index.css";
-import { addExpense } from "../../actions/actions";
-import { getTripMembers } from "../../selectors";
 import { AiFillCaretDown } from "react-icons/ai";
-import generateId from "../../utils/generateId";
+import { getGroupId } from "../../selectors";
+import { useGetGroupMembers } from "../../queries/query";
+import { useAddExpense } from "../../queries/mutation";
 
-const ExpenseAddForm = () => {
+const ExpenseAddForm = ({
+  refetchRecords,
+}: {
+  refetchRecords: (val: boolean) => void;
+}) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
   const toast = useToast();
-  const tripMembers = useSelector(getTripMembers);
+  const groupId = useSelector(getGroupId);
+  const groupMembersGetter = useGetGroupMembers(groupId);
 
   const clearForm = () => {
     setName("");
@@ -30,19 +34,7 @@ const ExpenseAddForm = () => {
     setDescription("");
   };
 
-  console.log(name);
-  const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    dispatch(
-      addExpense({
-        id: generateId(),
-        personName: name,
-        amount: parseInt(amount, 10),
-        description,
-      })
-    );
-    clearForm();
+  const onSuccess = () => {
     toast({
       title: "Expense Added",
       description: "The Expense had been added successfully.",
@@ -50,6 +42,35 @@ const ExpenseAddForm = () => {
       duration: 2000,
       isClosable: true,
       position: "top",
+    });
+    clearForm();
+    refetchRecords(true);
+  };
+
+  const onError = () => {
+    toast({
+      title: "Error while creating the group",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
+  const expenseAdder = useAddExpense(onSuccess, onError);
+
+  const tripMembers = groupMembersGetter.isFetched
+    ? groupMembersGetter.data
+    : [];
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    expenseAdder.mutate({
+      personName: name,
+      amount: parseInt(amount),
+      description,
+      groupId,
     });
   };
 
@@ -98,7 +119,13 @@ const ExpenseAddForm = () => {
             autoComplete="off"
           />
           <Flex>
-            <Button type="submit" colorScheme="green" width="45%" mr={5}>
+            <Button
+              type="submit"
+              colorScheme="green"
+              width="45%"
+              mr={5}
+              isLoading={expenseAdder.isLoading}
+            >
               Add Expense
             </Button>
             <Button

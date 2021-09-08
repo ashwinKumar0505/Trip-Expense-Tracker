@@ -14,26 +14,31 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ComboBox from "react-responsive-combo-box";
 import "react-responsive-combo-box/dist/index.css";
 import { AiFillCaretDown } from "react-icons/ai";
-import { addExpense } from "../../actions/actions";
-import generateId from "../../utils/generateId";
-import { getTripMembers } from "../../selectors";
+import { getGroupId } from "../../selectors";
+import { useGetGroupMembers } from "../../queries/query";
+import { useAddExpense } from "../../queries/mutation";
 
 type TAddExpenseModal = {
   isOpen: boolean;
   onClose: () => void;
+  refetchRecords: (val: boolean) => void;
 };
 
-const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
+const AddExpenseModal = ({
+  isOpen,
+  onClose,
+  refetchRecords,
+}: TAddExpenseModal) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
   const toast = useToast();
-  const tripMembers = useSelector(getTripMembers);
+  const groupId = useSelector(getGroupId);
+  const groupMembersGetter = useGetGroupMembers(groupId);
 
   const clearForm = () => {
     setName("");
@@ -41,18 +46,7 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
     setDescription("");
   };
 
-  const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    dispatch(
-      addExpense({
-        id: generateId(),
-        personName: name,
-        amount: parseInt(amount, 10),
-        description,
-      })
-    );
-    clearForm();
+  const onSuccess = () => {
     toast({
       title: "Expense Added",
       description: "The Expense had been added successfully.",
@@ -61,7 +55,36 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
       isClosable: true,
       position: "top",
     });
+    clearForm();
+    refetchRecords(true);
     onClose();
+  };
+
+  const onError = () => {
+    toast({
+      title: "Error while creating the group",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
+  const expenseAdder = useAddExpense(onSuccess, onError);
+
+  const tripMembers = groupMembersGetter.isFetched
+    ? groupMembersGetter.data
+    : [];
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    expenseAdder.mutate({
+      personName: name,
+      amount: parseInt(amount),
+      description,
+      groupId,
+    });
   };
 
   return (
@@ -116,7 +139,13 @@ const AddExpenseModal = ({ isOpen, onClose }: TAddExpenseModal) => {
 
           <ModalFooter>
             <Flex width="70%">
-              <Button type="submit" colorScheme="green" width="45%" mr={5}>
+              <Button
+                type="submit"
+                colorScheme="green"
+                width="45%"
+                mr={5}
+                isLoading={expenseAdder.isLoading}
+              >
                 Add Expense
               </Button>
               <Button

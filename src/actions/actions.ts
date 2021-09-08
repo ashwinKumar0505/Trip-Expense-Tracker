@@ -1,52 +1,28 @@
 import {
-  ADD_EXPENSE,
-  ADD_TRIP_MEMBERS,
-  ADD_TRIP_NAME,
-  DELETE_EXPENSE,
-  EDIT_EXPENSE,
-  RESTORE_STATE,
+  AUTHENTICATION,
+  LOGOUT,
+  UPDATE_CURRENT_GROUP,
 } from "../constants/actionTypes";
 
-type TExpenseData = {
-  id: string;
-  personName: string;
-  amount: number;
-  description: string;
-};
-
-export const addExpense = (expenseData: TExpenseData) => {
+export const updateCurrentGroup = (payload: {
+  groupId: string;
+  groupName: string;
+}) => {
   return {
-    type: ADD_EXPENSE,
-    payload: expenseData,
+    type: UPDATE_CURRENT_GROUP,
+    payload: payload,
   };
 };
 
-export const addTripName = (tripName: string) => ({
-  type: ADD_TRIP_NAME,
-  payload: {
-    tripName,
-  },
+export const authentication = (payload: {
+  isUserAuthenticated: boolean;
+  userName: string;
+  token: string;
+}) => ({
+  type: AUTHENTICATION,
+  payload,
 });
 
-export const addMembers = (members: string[]) => ({
-  type: ADD_TRIP_MEMBERS,
-  payload: {
-    members,
-  },
-});
-
-export const restoreState = () => ({
-  type: RESTORE_STATE,
-});
-
-export const deleteExpense = (expenseId: string) => ({
-  type: DELETE_EXPENSE,
-  payload: {
-    id: expenseId,
-  },
-});
-
-export const editExpense = (expenseData: TExpenseData) => ({
-  type: EDIT_EXPENSE,
-  payload: expenseData,
+export const logout = () => ({
+  type: LOGOUT,
 });

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import expenseReducer, { ExpenseState } from "./expenseReducer";
+import workspaceReducer, { WorkspaceState } from "./workspaceReducer";
 
 export type RootState = {
-  expense: ExpenseState;
+  workspace: WorkspaceState;
 };
 
-export default combineReducers({ expense: expenseReducer });
+export default combineReducers({ workspace: workspaceReducer });
