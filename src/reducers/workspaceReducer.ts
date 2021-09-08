@@ -1,8 +1,15 @@
-import { UPDATE_CURRENT_GROUP } from "../constants/actionTypes";
+import {
+  UPDATE_CURRENT_GROUP,
+  AUTHENTICATION,
+  LOGOUT,
+} from "../constants/actionTypes";
+import { setAccessToken } from "../utils/token";
 
 export type WorkspaceState = {
   groupId: string;
   groupName: string;
+  isUserAuthenticated: boolean;
+  userName: string;
 };
 
 type TAction = {
@@ -13,6 +20,8 @@ type TAction = {
 const initialState: WorkspaceState = {
   groupId: "",
   groupName: "",
+  isUserAuthenticated: false,
+  userName: "",
 };
 
 const workspaceReducer = (
@@ -27,6 +36,19 @@ const workspaceReducer = (
         groupId,
         groupName,
       };
+    }
+    case AUTHENTICATION: {
+      const { userName, isUserAuthenticated, token } = action.payload;
+      setAccessToken(token);
+      return {
+        ...state,
+        isUserAuthenticated,
+        userName,
+      };
+    }
+    case LOGOUT: {
+      localStorage.clear();
+      return initialState;
     }
     default: {
       return state;

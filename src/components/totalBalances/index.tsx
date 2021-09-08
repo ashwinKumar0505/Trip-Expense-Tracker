@@ -70,13 +70,13 @@ const TotalBalances = ({
             <Text mb={1}>
               The total amount invested for the trip is&nbsp;
               <Box fontWeight="semibold" as="span">
-                {totalAmount}
+                Rs.{totalAmount}
               </Box>
             </Text>
             <Text>
               The expenses per person is&nbsp;
               <Box fontWeight="semibold" as="span">
-                {expensePerPerson}
+                Rs.{expensePerPerson}
               </Box>
             </Text>
           </Box>

@@ -1,12 +1,14 @@
 import { useMutation } from "react-query";
-import axios from "axios";
 import {
   addExpense,
   createGroup,
   deleteExpense,
   editExpense,
   deleteGroup,
+  signIn,
+  signUp,
 } from "../constants/queryUrls";
+import axios from "../utils/customAxios";
 
 type TAddExpensePayload = {
   personName: string;
@@ -94,6 +96,34 @@ export const useDeleteGroup = (
     {
       onSuccess: onSuccess,
       onError: onError,
+    }
+  );
+};
+
+export const useSignIn = (
+  onSuccess?: (data: any) => void,
+  onError?: (err: any) => void
+) => {
+  return useMutation(
+    (payload: { email: string; password: string }) =>
+      axios.post(signIn(), payload).then((res) => res.data),
+    {
+      onSuccess,
+      onError,
+    }
+  );
+};
+
+export const useSignUp = (
+  onSuccess?: (data: any) => void,
+  onError?: (err: any) => void
+) => {
+  return useMutation(
+    (payload: { email: string; password: string; name: string }) =>
+      axios.post(signUp(), payload).then((res) => res.data),
+    {
+      onSuccess,
+      onError,
     }
   );
 };

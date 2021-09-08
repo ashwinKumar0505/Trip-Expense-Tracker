@@ -1,4 +1,8 @@
-import { UPDATE_CURRENT_GROUP } from "../constants/actionTypes";
+import {
+  AUTHENTICATION,
+  LOGOUT,
+  UPDATE_CURRENT_GROUP,
+} from "../constants/actionTypes";
 
 export const updateCurrentGroup = (payload: {
   groupId: string;
@@ -9,3 +13,16 @@ export const updateCurrentGroup = (payload: {
     payload: payload,
   };
 };
+
+export const authentication = (payload: {
+  isUserAuthenticated: boolean;
+  userName: string;
+  token: string;
+}) => ({
+  type: AUTHENTICATION,
+  payload,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
+});

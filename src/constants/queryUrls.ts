@@ -1,13 +1,20 @@
-const BASE_URL = "https://trip-expense-tracker.herokuapp.com";
+const BASE_URL = "https://trip-expense-tracker.herokuapp.com/";
 
-export const getExpensesByPerson = () => `${BASE_URL}/expenses-by-person`;
-export const getExpensesHistory = () => `${BASE_URL}/expenses-history`;
-export const getGroupMembers = () => `${BASE_URL}/group-members`;
-export const getGroupDetails = () => `${BASE_URL}/group-details`;
-export const getExpense = () => `${BASE_URL}/get-expense`;
+// Auth
+export const signIn = () => `${BASE_URL}/users/sign-in`;
+export const signUp = () => `${BASE_URL}/users/sign-up`;
 
-export const createGroup = () => `${BASE_URL}/create-group`;
-export const addExpense = () => `${BASE_URL}/add-expense`;
-export const deleteExpense = () => `${BASE_URL}/delete-expense`;
-export const editExpense = () => `${BASE_URL}/edit-expense`;
-export const deleteGroup = () => `${BASE_URL}/delete-group`;
+// Groups
+export const getExpensesByPerson = () =>
+  `${BASE_URL}/groups/expenses-by-person`;
+export const getExpensesHistory = () => `${BASE_URL}/groups/expenses-history`;
+export const getGroupMembers = () => `${BASE_URL}/groups/group-members`;
+export const getGroupDetails = () => `${BASE_URL}/groups/group-details`;
+export const getExpense = () => `${BASE_URL}/groups/get-expense`;
+export const getAllGroups = () => `${BASE_URL}/groups/all-groups`;
+
+export const createGroup = () => `${BASE_URL}/groups/create-group`;
+export const addExpense = () => `${BASE_URL}/groups/add-expense`;
+export const deleteExpense = () => `${BASE_URL}/groups/delete-expense`;
+export const editExpense = () => `${BASE_URL}/groups/edit-expense`;
+export const deleteGroup = () => `${BASE_URL}/groups/delete-group`;

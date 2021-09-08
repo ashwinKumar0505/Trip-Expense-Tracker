@@ -1,12 +1,13 @@
 import { useQuery } from "react-query";
-import axios from "axios";
 import {
   getExpensesHistory,
   getExpensesByPerson,
   getGroupMembers,
   getGroupDetails,
   getExpense,
+  getAllGroups,
 } from "../constants/queryUrls";
+import axios from "../utils/customAxios";
 
 type TResponseData = {
   _id: string;
@@ -64,5 +65,11 @@ export const useGetExpenseById = (
     {
       onSuccess: onSuccess,
     }
+  );
+};
+
+export const useGetAllGroups = () => {
+  return useQuery("all-groups", () =>
+    axios.get(getAllGroups()).then((res) => res.data)
   );
 };
