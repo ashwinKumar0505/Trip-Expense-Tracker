@@ -19,7 +19,7 @@ function App() {
   const history = useHistory();
 
   const logoutUser = () => {
-    dispatch(logout);
+    dispatch(logout());
     history.push("/");
   };
 
