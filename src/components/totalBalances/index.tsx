@@ -54,8 +54,15 @@ const TotalBalances = ({
         }`;
       }
     };
+
+    const findTotalExpensesSum = (expensesHistory: { amount: number }[]) => {
+      return expensesHistory.reduce(
+        (partial_sum, history) => partial_sum + history.amount,
+        0
+      );
+    };
     return (
-      <Box height="95%" overflowY="auto" p={4}>
+      <Box height="90%" overflowY="auto" p={4}>
         <Alert
           status="info"
           variant="left-accent"
@@ -118,6 +125,17 @@ const TotalBalances = ({
                       <Text>No investments done yet</Text>
                     )}
                   </UnorderedList>
+                  {individualExpensesHistory.length > 0 && (
+                    <Text mt={3} color="gray.600">
+                      Total Amount invested is{" "}
+                      <Box as="span" fontWeight="bold">
+                        {" "}
+                        Rs. {findTotalExpensesSum(
+                          individualExpensesHistory
+                        )}{" "}
+                      </Box>
+                    </Text>
+                  )}
                 </AccordionPanel>
               </AccordionItem>
             );

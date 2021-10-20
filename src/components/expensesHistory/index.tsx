@@ -105,7 +105,7 @@ const ExpensesHistory = ({
     );
   }
   return (
-    <Box height="95%" overflowY="auto" p={4}>
+    <Box height="90%" overflowY="auto" p={4}>
       {isOpen && (
         <EditExpenseModal
           isOpen={isOpen}

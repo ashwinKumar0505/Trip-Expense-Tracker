@@ -153,10 +153,10 @@ const GroupsListPage = () => {
               px={isLargerThan850 ? "50px" : 5}
               py={5}
             >
-              {groupNamesFetcher.isFetching && (
+              {groupNamesFetcher.isLoading && (
                 <Loader loadingText="Loading GroupNames ..." />
               )}
-              {!groupNamesFetcher.isFetching && (
+              {groupNamesFetcher.data && (
                 <Grid
                   width="100%"
                   templateColumns={
