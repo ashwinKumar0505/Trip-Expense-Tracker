@@ -100,7 +100,7 @@ const Header = () => {
             >
               <Flex alignItems="center">
                 <Icon as={MdGroup} mr={2} w={5} h={6} />
-                <Text fontWeight="medium">My Groups</Text>
+                <Text fontWeight="medium">My Trips</Text>
               </Flex>
             </MenuItem>
             <MenuItem
@@ -109,13 +109,13 @@ const Header = () => {
             >
               <Flex alignItems="center">
                 <Icon as={MdGroupAdd} mr={2} w={5} h={6} />
-                <Text fontWeight="medium">Create New Group</Text>
+                <Text fontWeight="medium">Create New Trip</Text>
               </Flex>
             </MenuItem>
             <MenuItem onClick={deleteGroup} fontSize="14px">
               <Flex alignItems="center">
                 <Icon as={AiFillDelete} mr={2} w={5} h={4} />
-                <Text fontWeight="medium">Delete Group</Text>
+                <Text fontWeight="medium">Delete Trip</Text>
               </Flex>
             </MenuItem>
             <MenuItem onClick={logoutClickHandler} fontSize="14px">
